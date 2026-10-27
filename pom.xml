@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.malcolm</groupId>
-    <artifactId>LearingingSpring</artifactId>
+    <artifactId>LearningSpring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>LearingingSpring</name>
-    <description>LearingingSpring</description>
+    <name>LearningSpring</name>
+    <description>Educational project to learn Java web development using Spring.</description>
     <url/>
     <licenses>
         <license/>

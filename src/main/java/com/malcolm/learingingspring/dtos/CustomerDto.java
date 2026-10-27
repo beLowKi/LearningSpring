@@ -13,6 +13,6 @@ public class CustomerDto {
     private UUID id;
     private String name;
     private String email;
-    private Set<OrderDto> orders;
-    private Set<CartItemDto> cartItems;
+//    private Set<OrderDto> orders;
+//    private Set<CartItemDto> cartItems;
 }
