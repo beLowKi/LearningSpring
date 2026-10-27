@@ -3,9 +3,7 @@ package com.malcolm.learingingspring.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Setter
 @Getter
@@ -33,12 +31,12 @@ public class Customer {
     private String address;
 
     @OneToMany(
-            mappedBy = "customers",
+            mappedBy = "customer",
             cascade = { CascadeType.PERSIST, CascadeType.REMOVE },
             orphanRemoval = true
     )
     @Builder.Default
-    private List<CartItem> cartItems = new ArrayList<>();
+    private Set<CartItem> cartItems =  new HashSet<>();
 
     public void addCartItem(CartItem cartItem) {
         cartItems.add(cartItem);
@@ -51,7 +49,7 @@ public class Customer {
     }
 
     @OneToMany(
-            mappedBy = "customers",
+            mappedBy = "customer",
             cascade = { CascadeType.PERSIST, CascadeType.REMOVE },
             orphanRemoval = true
     )

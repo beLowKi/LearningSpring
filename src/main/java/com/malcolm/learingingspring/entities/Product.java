@@ -3,6 +3,8 @@ package com.malcolm.learingingspring.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 @Setter
@@ -11,8 +13,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "catalogue_items")
-public class CatalogueItem {
+@Table(name = "products")
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     UUID id;
@@ -29,4 +31,19 @@ public class CatalogueItem {
             check = @CheckConstraint(constraint = "price >= 0.0")
     )
     Double price;
+
+    @ManyToMany(
+            mappedBy = "products",
+            cascade = { CascadeType.PERSIST }
+    )
+    @Builder.Default
+    Set<Category> categories =  new HashSet<>();
+
+    public void addCategory(Category category) {
+        categories.add(category);
+    }
+
+    public void removeCategory(Category category) {
+        categories.remove(category);
+    }
 }

@@ -4,9 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Setter
 @Getter
@@ -31,12 +29,12 @@ public class Order {
     Timestamp createdAt;
 
     @OneToMany(
-            mappedBy = "orders",
+            mappedBy = "order",
             cascade = { CascadeType.PERSIST, CascadeType.REMOVE },
             orphanRemoval = true
     )
     @Builder.Default
-    List<OrderItem> orderItems = new ArrayList<>();
+    Set<OrderItem> orderItems = new HashSet<>();
 
     public void addOrderItem(OrderItem orderItem) {
         orderItems.add(orderItem);
