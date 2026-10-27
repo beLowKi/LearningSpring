@@ -15,7 +15,7 @@ import com.malcolm.learingingspring.entities.Customer;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/v1/customers/")
+@RequestMapping("/api/v1/customers")
 public class CustomerApiController {
 
     // TODO more informative 400 messages; e.g., explaining which param is incorrect and why

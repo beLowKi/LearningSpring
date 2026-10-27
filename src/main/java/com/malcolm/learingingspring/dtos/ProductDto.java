@@ -1,6 +1,5 @@
 package com.malcolm.learingingspring.dtos;
 
-import com.malcolm.learingingspring.entities.Category;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -13,6 +12,6 @@ public class ProductDto {
     private UUID id;
     private String name;
     private String about;
-    private double price;
-    private Set<Category> categories;
+    private Double price;
+    private Set<CategoryDto> categories;
 }
