@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @RestController
@@ -23,6 +24,27 @@ public class ProductApiController {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+
+    /**
+     * Returns a list of all Products.
+     * @param sort Optional sorting field
+     * @return List of Product info
+     */
+    @GetMapping
+    public ResponseEntity<List<ProductDto>> getAllProducts(
+            @RequestParam(required = false, defaultValue = "", name = "sort") String sort,
+    ) {
+        if ( !Set.of("name", "price").contains(sort) ) {
+            sort = "name";
+        }
+
+        return ResponseEntity.ok(
+                productRepository.findAll(Sort.by(sort))
+                        .stream()
+                        .map(productMapper::toDto)
+                        .toList()
+        );
+    }
 
     /**
      * Returns list of Products. TBD making this a post request.
