@@ -133,7 +133,7 @@ ON DUPLICATE KEY UPDATE customer_id               = new.customer_id,
 -- ---------------------------------------------------------------------------
 -- Order items (13) - a few orders contain more than one product
 -- ---------------------------------------------------------------------------
-INSERT INTO order_items (order_id, catalogue_item_id, quantity, unit_price)
+INSERT INTO order_items (order_id, product_id, quantity, unit_price)
 VALUES (UUID_TO_BIN('e0000000-0000-4000-8000-000000000001'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000001'), 1, 79.99),
        (UUID_TO_BIN('e0000000-0000-4000-8000-000000000001'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000005'), 2, 12.50),
        (UUID_TO_BIN('e0000000-0000-4000-8000-000000000002'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000002'), 1, 129.50),
@@ -154,7 +154,7 @@ ON DUPLICATE KEY UPDATE quantity   = new.quantity,
 -- ---------------------------------------------------------------------------
 -- Cart items (10) - one item per customer
 -- ---------------------------------------------------------------------------
-INSERT INTO cart_items (customer_id, catalogue_item_id, quantity)
+INSERT INTO cart_items (customer_id, product_id, quantity)
 VALUES (UUID_TO_BIN('d0000000-0000-4000-8000-000000000001'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000002'), 1),
        (UUID_TO_BIN('d0000000-0000-4000-8000-000000000002'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000004'), 1),
        (UUID_TO_BIN('d0000000-0000-4000-8000-000000000003'), UUID_TO_BIN('a0000000-0000-4000-8000-000000000006'), 1),

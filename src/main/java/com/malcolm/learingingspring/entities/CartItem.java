@@ -1,6 +1,6 @@
 package com.malcolm.learingingspring.entities;
 
-import com.malcolm.learingingspring.utils.models.CartItemId;
+import com.malcolm.learingingspring.utils.models.CustomerProductId;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Builder
 @Entity
-@IdClass(CartItemId.class)
+@IdClass(CustomerProductId.class)
 @Table(name = "cart_items")
 public class CartItem {
     @Id
@@ -20,16 +20,16 @@ public class CartItem {
     private UUID customerId;
 
     @Id
-    @Column(name = "catalogue_item_id")
-    private UUID catalogueItemId;
+    @Column(name = "product_id")
+    private UUID productId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @ManyToOne
-    @JoinColumn(name = "catalogue_item_id", nullable = false)
-    private Product item;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Product product;
 
     @Column(
             name = "quantity",

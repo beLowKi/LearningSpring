@@ -36,8 +36,8 @@ public class ProductSpecifications {
             List<Predicate> predicates = new ArrayList<>();
 
             // Adds category filter
-            if ( categoryIds != null && !categoryIds.isEmpty() ) {
-                Join<Product, Category> join = root.join("category", JoinType.INNER);
+            if (categoryIds != null && !categoryIds.isEmpty()) {
+                Join<Product, Category> join = root.join("categories",  JoinType.INNER);
                 predicates.add(join.get("id").in(categoryIds));
                 query.distinct(true);
             }

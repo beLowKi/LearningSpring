@@ -83,4 +83,26 @@ public class CustomerApiController {
 
         return customerRepository.save(customer);
     }
+
+
+    /**
+     * Deletes the Customer with the given ID.
+     * @param id Target Customer ID
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable UUID id) {
+        Customer customer = customerRepository.findById(id).orElse(null);
+
+        if  (customer == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        try {
+            customerRepository.delete(customer);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
 }

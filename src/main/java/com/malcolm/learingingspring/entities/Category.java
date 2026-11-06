@@ -22,7 +22,7 @@ public class Category {
     @Column(name = "name", length = 100, nullable = false, unique = true)
     private String name;
 
-    @ManyToMany
+    @ManyToMany(cascade = { CascadeType.PERSIST,  CascadeType.MERGE, CascadeType.REFRESH })
     @JoinTable(
             name = "product_categories",
             joinColumns = @JoinColumn(name = "category_id"),

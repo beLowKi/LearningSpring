@@ -65,4 +65,22 @@ public class Customer {
         orders.remove(order);
         order.setCustomer(null);
     }
+
+    @OneToMany(
+            mappedBy = "customer",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @Builder.Default
+    Set<Review> reviews = new HashSet<>();
+
+    public void addReview(Review review) {
+        reviews.add(review);
+        review.setCustomer(this);
+    }
+
+    public void removeReview(Review review) {
+        reviews.remove(review);
+    }
 }

@@ -5,5 +5,5 @@ import java.util.UUID;
 
 public record OrderItemId(
         UUID orderId,
-        UUID catalogueItemId
+        UUID productId
 ) implements Serializable {}

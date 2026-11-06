@@ -1,17 +1,20 @@
 package com.malcolm.learingingspring.requests;
 
 import com.fasterxml.jackson.annotation.JsonValue;
-import lombok.Value;
+import com.malcolm.learingingspring.utils.Const;
+import lombok.Data;
+import org.springframework.data.domain.Sort;
 
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Value
-public class QueryProductsRequest {
+@Data
+public class SearchProductsRequest {
     public enum SortBy {
-        NAME("NAME"),
-        PRICE("PRICE");
+        ID("id"),
+        NAME("name"),
+        PRICE("price");
 
         private final String value;
 
@@ -26,9 +29,11 @@ public class QueryProductsRequest {
     }
 
     SortBy sortBy = SortBy.NAME;
+    Sort.Direction sortDirection = Sort.Direction.ASC;
     Integer skip = 0;
-    Integer limit = 250;
+    Integer limit = Const.PAGE_LIMIT;
     Set<UUID> categoryIds = new HashSet<>();
+    Set<String> includes = new HashSet<>();
     Double minPrice = null;
     Double maxPrice = null;
 }
