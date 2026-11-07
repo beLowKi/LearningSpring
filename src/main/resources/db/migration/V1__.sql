@@ -35,7 +35,8 @@ CREATE TABLE order_items
 CREATE TABLE orders
 (
     id                        BINARY(16)   NOT NULL,
-    customer_id               BINARY(16)   NOT NULL,
+    customer_id               BINARY(16)   NULL,
+    status                    VARCHAR(10)  NOT NULL,
     shipping_address_snapshot VARCHAR(255) NOT NULL,
     created_at                datetime(6)  NOT NULL,
     CONSTRAINT pk_orders PRIMARY KEY (id)
@@ -57,6 +58,16 @@ CREATE TABLE products
     CONSTRAINT pk_products PRIMARY KEY (id)
 );
 
+CREATE TABLE reviews
+(
+    customer_id BINARY(16)    NOT NULL,
+    product_id  BINARY(16)    NOT NULL,
+    rating      DOUBLE        NOT NULL,
+    title       VARCHAR(255)  NOT NULL,
+    message     VARCHAR(1000) NOT NULL,
+    CONSTRAINT pk_reviews PRIMARY KEY (customer_id, product_id)
+);
+
 ALTER TABLE categories
     ADD CONSTRAINT uc_categories_name UNIQUE (name);
 
@@ -74,6 +85,12 @@ ALTER TABLE order_items
 
 ALTER TABLE order_items
     ADD CONSTRAINT FK_ORDER_ITEMS_ON_PRODUCT FOREIGN KEY (product_id) REFERENCES products (id);
+
+ALTER TABLE reviews
+    ADD CONSTRAINT FK_REVIEWS_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES customers (id);
+
+ALTER TABLE reviews
+    ADD CONSTRAINT FK_REVIEWS_ON_PRODUCT FOREIGN KEY (product_id) REFERENCES products (id);
 
 ALTER TABLE product_categories
     ADD CONSTRAINT fk_procat_on_category FOREIGN KEY (category_id) REFERENCES categories (id);
